@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios 发送AJAX请求</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.26.0/axios.js"></script>
+
+</head>
+
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+    <script>
+        //github上有英文文档
+        const btns = document.querySelectorAll('button');
+        //配置baseURL
+        axios.defaults.baseURL = 'http://127.0.0.1:8000';
+        btns[0].onclick = function() {
+            //GET  请求
+            //在设置baseURL后不用写'http://127.0.0.1:8000/axios-server
+            axios.get('/axios-server', {
+                //url参数
+                params: {
+                    id: 100,
+                    vip: 7,
+                },
+                //请求头信息
+                Headers: {
+                    name: 'crj',
+                    age: 20,
+                }
+            }).then(value => {
+                console.log(value)
+            })
+        }
+        btns[1].onclick = function() {
+                axios.post('/axios-server', {
+                    username: 'admin',
+                    password: 'admin'
+                }, {
+                    params: {
+                        id: 100,
+                        vip: 1
+
+                    },
+                    headers: {
+                        name: 'crj',
+                        age: 20
+                    }
+                })
+            }
+            //axios通用发送方式（函数）
+        btns[2].onclick = function() {
+            axios({
+                //请求方法
+                method: 'POST',
+                //url
+                url: '/axios-server',
+                //url参数
+                params: {
+                    vip: 10,
+                    level: 30
+                },
+                headers: {
+                    a: 100,
+                    b: 200
+                },
+                data: {
+                    name1: 'crj',
+                    age1: '20',
+                    name2: 'lxk',
+                    age2: '22',
+                }
+            }).then(response => {
+                console.log(response);
+            })
+        }
+    </script>
+</body>
+
+</html>
