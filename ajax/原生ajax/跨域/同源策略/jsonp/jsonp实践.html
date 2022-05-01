@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    用户名：<input type="text" id="uname">
+    <p></p>
+    <script>
+        const input = document.querySelector('#uname');
+        const p = document.querySelector('p');
+
+        function handle(data) {
+            input.style.border = "solid 1px #f00";
+            p.innerHTML = data.msg;
+
+        }
+        input.onblur = function() {
+            //获取用户输入值
+            let uname = this.value;
+            //向服务端发送请求  检测用户名是否存在
+            const script = document.createElement('script');
+            script.src = 'http://127.0.0.1:8000/check-uname';
+            document.body.appendChild(script);
+
+        }
+    </script>
+</body>
+
+</html>
